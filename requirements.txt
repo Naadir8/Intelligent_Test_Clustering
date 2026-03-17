@@ -1,0 +1,12 @@
+# Core scientific computing and data handling
+numpy>=1.26.0
+pandas>=2.2.0
+
+# Visualization
+matplotlib>=3.9.0
+
+# Machine learning algorithms and metrics
+scikit-learn>=1.5.0
+
+# Text embedding generation (core component of the project)
+sentence-transformers>=3.0.0

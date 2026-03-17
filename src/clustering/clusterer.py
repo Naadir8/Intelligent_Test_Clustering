@@ -1,0 +1,117 @@
+"""Provide clustering and evaluation utilities for embedding vectors.
+
+This module is responsible for:
+- grouping embeddings into clusters using unsupervised algorithms,
+- evaluating clustering quality using standard metrics,
+- supporting comparison with ground-truth labels (if available).
+"""
+
+from sklearn.cluster import KMeans
+from sklearn.metrics import adjusted_rand_score, normalized_mutual_info_score, silhouette_score
+import numpy as np
+import pandas as pd
+
+
+class TestCaseClusterer:
+    """Perform clustering on embeddings and compute evaluation metrics.
+
+    This class encapsulates:
+    - clustering via KMeans,
+    - prediction of cluster labels,
+    - evaluation using both internal and external metrics.
+
+    Attributes:
+        n_clusters (int): Expected number of clusters.
+        random_state (int): Seed for reproducibility.
+        model (KMeans | None): Fitted clustering model.
+    """
+
+    def __init__(self, n_clusters: int = 8, random_state: int = 42):
+        """Initialize clustering configuration.
+
+        Args:
+            n_clusters (int): Number of clusters for KMeans.
+            random_state (int): Random seed for deterministic results.
+        """
+        self.n_clusters = n_clusters
+        self.random_state = random_state
+        self.model = None
+
+    def fit_predict(self, embeddings: np.ndarray) -> np.ndarray:
+        """Fit KMeans model and assign cluster labels.
+
+        Args:
+            embeddings (np.ndarray): Input feature matrix of shape
+                (n_samples, embedding_dim).
+
+        Returns:
+            np.ndarray: Predicted cluster labels for each sample.
+        """
+        print(f"Running KMeans with {self.n_clusters} clusters ...")
+
+        # Initialize KMeans clustering model
+        self.model = KMeans(
+            n_clusters=self.n_clusters,
+            random_state=self.random_state,
+            n_init=10  # multiple initializations to improve stability
+        )
+
+        # Fit model and assign cluster labels
+        labels = self.model.fit_predict(embeddings)
+
+        print(f"Predicted {len(set(labels))} clusters")
+
+        return labels
+
+    @staticmethod
+    def evaluate(
+            predicted_labels: np.ndarray,
+        true_labels: pd.Series | np.ndarray,
+        embeddings: np.ndarray
+    ) -> dict:
+        """Compute clustering quality metrics.
+
+        Includes:
+        - External metrics (require ground truth):
+            * Adjusted Rand Index (ARI)
+            * Normalized Mutual Information (NMI)
+        - Internal metric:
+            * Silhouette Score (based on embedding distances)
+
+        Args:
+            predicted_labels (np.ndarray): Cluster labels produced by the model.
+            true_labels (pd.Series | np.ndarray): Ground-truth labels.
+            embeddings (np.ndarray): Feature matrix used for clustering.
+
+        Returns:
+            dict: Dictionary with metric names and their values.
+        """
+        # Convert categorical labels to numeric codes if needed
+        if isinstance(true_labels, pd.Series):
+            true_labels = true_labels.astype('category').cat.codes.values
+
+        # External evaluation: compare predicted clusters with ground truth
+        ari = adjusted_rand_score(true_labels, predicted_labels)
+        nmi = normalized_mutual_info_score(true_labels, predicted_labels)
+
+        # Internal evaluation: measure cluster cohesion and separation
+        sil = (
+            silhouette_score(embeddings, predicted_labels)
+            if len(set(predicted_labels)) > 1
+            else -1.0  # undefined for a single cluster
+        )
+
+        # Aggregate metrics into a structured dictionary
+        metrics = {
+            "Adjusted Rand Index (ARI)": ari,
+            "Normalized Mutual Information (NMI)": nmi,
+            "Silhouette Score": sil
+        }
+
+        print("\nClustering quality metrics:")
+
+        # Pretty-print metrics for quick inspection
+        for name, value in metrics.items():
+            print(f"  {name}: {value:.4f}")
+
+        return metrics
