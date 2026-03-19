@@ -1,0 +1,47 @@
+[tool.ruff]
+# Where to find the code
+src = ["src", "main.py"]
+
+# Maximum line length (100 — a compromise between PEP 8 and readability)
+line-length = 100
+
+# Rules to enable
+select = [
+    "E",      # pycodestyle errors
+    "W",      # pycodestyle warnings
+    "F",      # pyflakes (unused imports тощо)
+    "I",      # isort (сортування імпортів)
+    "UP",     # pyupgrade (сучасні конструкції)
+    "B",      # flake8-bugbear (потенційні баги)
+    "C4",     # flake8-comprehensions
+    "SIM",    # flake8-simplify (спрощення коду)
+    "D",      # pydocstyle (docstrings)
+    "ANN",    # type annotations
+]
+
+# Rules to ignore (can be extended later)
+ignore = [
+    "D100",   # Missing docstring in public module
+    "D104",   # Missing docstring in __init__.py
+    "ANN101", # Missing type annotation for self
+    "ANN401", # Dynamically typed expression (якщо є)
+]
+
+# Auto-fix for all enabled rules
+fixable = ["ALL"]
+
+# Directories/files to exclude from linting
+exclude = [
+    ".venv",
+    ".git",
+    "__pycache__",
+    "data",
+    "docs",
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
