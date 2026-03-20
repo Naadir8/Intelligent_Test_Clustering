@@ -6,10 +6,10 @@ This module is responsible for:
 - supporting comparison with ground-truth labels (if available).
 """
 
-from sklearn.cluster import KMeans
-from sklearn.metrics import adjusted_rand_score, normalized_mutual_info_score, silhouette_score
 import numpy as np
 import pandas as pd
+from sklearn.cluster import KMeans
+from sklearn.metrics import adjusted_rand_score, normalized_mutual_info_score, silhouette_score
 
 
 class TestCaseClusterer:
@@ -26,7 +26,7 @@ class TestCaseClusterer:
         model (KMeans | None): Fitted clustering model.
     """
 
-    def __init__(self, n_clusters: int = 8, random_state: int = 42):
+    def __init__(self, n_clusters: int = 8, random_state: int = 42) -> None:
         """Initialize clustering configuration.
 
         Args:
@@ -53,7 +53,7 @@ class TestCaseClusterer:
         self.model = KMeans(
             n_clusters=self.n_clusters,
             random_state=self.random_state,
-            n_init=10  # multiple initializations to improve stability
+            n_init=10,  # multiple initializations to improve stability
         )
 
         # Fit model and assign cluster labels
@@ -65,9 +65,7 @@ class TestCaseClusterer:
 
     @staticmethod
     def evaluate(
-            predicted_labels: np.ndarray,
-        true_labels: pd.Series | np.ndarray,
-        embeddings: np.ndarray
+        predicted_labels: np.ndarray, true_labels: pd.Series | np.ndarray, embeddings: np.ndarray
     ) -> dict:
         """Compute clustering quality metrics.
 
@@ -88,7 +86,7 @@ class TestCaseClusterer:
         """
         # Convert categorical labels to numeric codes if needed
         if isinstance(true_labels, pd.Series):
-            true_labels = true_labels.astype('category').cat.codes.values
+            true_labels = true_labels.astype("category").cat.codes.values
 
         # External evaluation: compare predicted clusters with ground truth
         ari = adjusted_rand_score(true_labels, predicted_labels)
@@ -105,7 +103,7 @@ class TestCaseClusterer:
         metrics = {
             "Adjusted Rand Index (ARI)": ari,
             "Normalized Mutual Information (NMI)": nmi,
-            "Silhouette Score": sil
+            "Silhouette Score": sil,
         }
 
         print("\nClustering quality metrics:")

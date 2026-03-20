@@ -7,12 +7,12 @@ This module handles:
 - optionally persisting embeddings for reuse.
 """
 
-from sentence_transformers import SentenceTransformer
+from pathlib import Path
+
 import numpy as np
 import pandas as pd
-from typing import List, Optional
 import torch
-from pathlib import Path
+from sentence_transformers import SentenceTransformer
 
 
 class TestCaseEmbedder:
@@ -28,7 +28,7 @@ class TestCaseEmbedder:
         device (str): Execution device ("cuda" or "cpu").
     """
 
-    def __init__(self, model_name: str = 'all-MiniLM-L6-v2'):
+    def __init__(self, model_name: str = "all-MiniLM-L6-v2") -> None:
         """Initialize embedding model and configure execution device.
 
         Args:
@@ -44,7 +44,7 @@ class TestCaseEmbedder:
 
         print(f"Model loaded on {self.device}")
 
-    def embed(self, texts: List[str], batch_size: int = 32) -> np.ndarray:
+    def embed(self, texts: list[str], batch_size: int = 32) -> np.ndarray:
         """Convert a list of texts into normalized embedding vectors.
 
         Args:
@@ -62,7 +62,7 @@ class TestCaseEmbedder:
             batch_size=batch_size,
             show_progress_bar=True,
             convert_to_numpy=True,
-            normalize_embeddings=True  # ensures cosine similarity ≈ dot product
+            normalize_embeddings=True,  # ensures cosine similarity ≈ dot product
         )
 
         print(f"Embeddings shape: {embeddings.shape}")
@@ -70,10 +70,7 @@ class TestCaseEmbedder:
         return embeddings
 
     def embed_dataframe(
-        self,
-        df: pd.DataFrame,
-        text_column: str = "description",
-        save_path: Optional[str] = None
+        self, df: pd.DataFrame, text_column: str = "description", save_path: str | None = None
     ) -> pd.DataFrame:
         """Generate embeddings for a DataFrame column and attach them.
 

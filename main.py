@@ -1,15 +1,16 @@
 """Main entry point — launches the entire pipeline."""
 
-import pandas as pd
-import numpy as np
 from pathlib import Path
 
+import numpy as np
+import pandas as pd
+from src.clustering.clusterer import TestCaseClusterer
 from src.data.loader import TestCaseLoader
 from src.embedding.embedder import TestCaseEmbedder
-from src.clustering.clusterer import TestCaseClusterer
 
 
-def main():
+def main() -> None:
+    """Launch the entire intelligent test case clustering pipeline."""
     print("=== Intelligent Test Case Clustering System ===\n")
 
     # Run data generation or loading.
@@ -30,7 +31,7 @@ def main():
         df["embedding"] = list(embeddings)
     else:
         print("Embeddings не знайдено → генеруємо заново")
-        embedder = TestCaseEmbedder(model_name='all-MiniLM-L6-v2')
+        embedder = TestCaseEmbedder(model_name="all-MiniLM-L6-v2")
         df = embedder.embed_dataframe(df, text_column="description")
 
         embeddings = np.array(df["embedding"].tolist())
@@ -49,9 +50,7 @@ def main():
 
     # Evaluate clustering performance.
     clusterer.evaluate(
-        predicted_labels=predicted_labels,
-        true_labels=df["true_cluster"],
-        embeddings=embeddings
+        predicted_labels=predicted_labels, true_labels=df["true_cluster"], embeddings=embeddings
     )
 
     print("\nDone! You can now analyze df['predicted_cluster'] vs df['true_cluster']")
