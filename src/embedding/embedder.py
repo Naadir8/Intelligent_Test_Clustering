@@ -16,17 +16,15 @@ from sentence_transformers import SentenceTransformer
 
 
 class TestCaseEmbedder:
-    """Generate dense vector representations (embeddings) for test case texts.
+    """Generates dense vector embeddings for test case texts.
 
-    This class wraps a SentenceTransformer model and provides methods for:
-    - batch encoding of text data,
-    - normalization of embeddings for similarity-based tasks,
-    - seamless integration with tabular datasets.
+        Uses a pretrained SentenceTransformer model to convert natural language
+        descriptions into fixed-size vectors suitable for clustering.
 
-    Attributes:
-        model (SentenceTransformer): Loaded embedding model.
-        device (str): Execution device ("cuda" or "cpu").
-    """
+        Attributes:
+            model (SentenceTransformer): Loaded embedding model.
+            device (str): Device used for inference ('cpu' or 'cuda').
+        """
 
     def __init__(self, model_name: str = "all-MiniLM-L6-v2") -> None:
         """Initialize embedding model and configure execution device.
@@ -74,15 +72,25 @@ class TestCaseEmbedder:
     ) -> pd.DataFrame:
         """Generate embeddings for a DataFrame column and attach them.
 
-        Args:
-            df (pd.DataFrame): Input dataset.
-            text_column (str): Column containing text to embed.
-            save_path (Optional[str]): Optional path to save embeddings (.npy).
+                Args:
+                    df: Input DataFrame containing test cases.
+                    text_column: Name of the column with text to embed.
+                    save_path: Optional path to save embeddings as .npy file.
 
-        Returns:
-            pd.DataFrame: Copy of the input DataFrame with an added
-                "embedding" column containing vector representations.
-        """
+                Returns:
+                    pd.DataFrame: Copy of input DataFrame with added 'embedding' column
+                        containing numpy arrays of shape (embedding_dim,).
+
+                Raises:
+                    KeyError: If text_column does not exist in DataFrame.
+                    RuntimeError: If model fails to encode texts.
+
+                Example:
+                    >>> embedder = TestCaseEmbedder()
+                    >>> df_with_emb = embedder.embed_dataframe(df)
+                    >>> print(df_with_emb["embedding"].iloc[0].shape)
+                    (384)
+                """
         # Extract text data from DataFrame
         texts = df[text_column].tolist()
 

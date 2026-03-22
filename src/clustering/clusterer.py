@@ -13,18 +13,15 @@ from sklearn.metrics import adjusted_rand_score, normalized_mutual_info_score, s
 
 
 class TestCaseClusterer:
-    """Perform clustering on embeddings and compute evaluation metrics.
+    """Performs clustering on embeddings and evaluates quality.
 
-    This class encapsulates:
-    - clustering via KMeans,
-    - prediction of cluster labels,
-    - evaluation using both internal and external metrics.
+        Uses KMeans by default and computes both internal and external metrics.
 
-    Attributes:
-        n_clusters (int): Expected number of clusters.
-        random_state (int): Seed for reproducibility.
-        model (KMeans | None): Fitted clustering model.
-    """
+        Attributes:
+            n_clusters (int): Number of clusters.
+            random_state (int): Seed for reproducibility.
+            model (KMeans): Fitted clustering model.
+        """
 
     def __init__(self, n_clusters: int = 8, random_state: int = 42) -> None:
         """Initialize clustering configuration.
@@ -67,23 +64,29 @@ class TestCaseClusterer:
     def evaluate(
         predicted_labels: np.ndarray, true_labels: pd.Series | np.ndarray, embeddings: np.ndarray
     ) -> dict:
-        """Compute clustering quality metrics.
+        """Evaluate clustering quality using multiple metrics.
 
-        Includes:
-        - External metrics (require ground truth):
-            * Adjusted Rand Index (ARI)
-            * Normalized Mutual Information (NMI)
-        - Internal metric:
-            * Silhouette Score (based on embedding distances)
+                Computes external metrics (ARI, NMI) against ground truth and
+                internal metric (Silhouette Score) based on embedding distances.
 
-        Args:
-            predicted_labels (np.ndarray): Cluster labels produced by the model.
-            true_labels (pd.Series | np.ndarray): Ground-truth labels.
-            embeddings (np.ndarray): Feature matrix used for clustering.
+                Args:
+                    predicted_labels: Cluster labels predicted by the model.
+                    true_labels: Ground-truth cluster labels.
+                    embeddings: Feature matrix used for clustering.
 
-        Returns:
-            dict: Dictionary with metric names and their values.
-        """
+                Returns:
+                    dict: Dictionary with metric names and values:
+                        - Adjusted Rand Index (ARI)
+                        - Normalized Mutual Information (NMI)
+                        - Silhouette Score
+
+                Raises:
+                    ValueError: If labels have different lengths or too few clusters.
+
+                Example:
+                    >>> metrics = clusterer.evaluate(labels, df["true_cluster"], emb)
+                    >>> print(metrics["Adjusted Rand Index (ARI)"])
+                """
         # Convert categorical labels to numeric codes if needed
         if isinstance(true_labels, pd.Series):
             true_labels = true_labels.astype("category").cat.codes.values

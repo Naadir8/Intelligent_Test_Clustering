@@ -25,14 +25,44 @@ Group semantically similar test cases (by title and description) to detect dupli
 - `clusterer.py` — applies KMeans clustering and computes ARI, NMI, Silhouette Score  
 - `main.py` — full pipeline: generate → embed → cluster → evaluate
 
-**Planned improvements**
-- Add text preprocessing (stopword removal, lemmatization, normalization) — preprocessing/
-- Implement 2D/3D cluster visualization (UMAP + scatter plots with true vs predicted labels) — visualization/
-- Compare multiple clustering algorithms: KMeans, HDBSCAN, AgglomerativeClustering, DBSCAN
-- Add comparison of different embedding models (paraphrase-mpnet, multilingual, distiluse, etc.)
-- Implement duplicate detection within clusters and test set reduction metrics
-- Integrate a real-world test case dataset (e.g., from Kaggle or other open sources)
-- Add YAML-based configuration (model, number of clusters, parameters, etc.)
-- Add logging and a CLI interface (argparse or click)
-- Write unit tests (pytest) for core modules
-- Add export of clustering results to CSV/Excel for analysis
+# Code Documentation Standards
+
+All public classes, methods, and functions must be documented using **Google-style docstrings** (PEP 257 + Google Python Style Guide).
+
+**Mandatory sections**:
+- Short description (first line)
+- Args: (parameters with types and descriptions)
+- Returns: (return type and description)
+- Raises: (possible exceptions)
+- Example: (short usage example — strongly recommended)
+
+**Example**:
+```python
+def example_function(param1: int, param2: str) -> bool:
+    """Short one-line description.
+
+    Longer explanation if needed.
+
+    Args:
+        param1: Description of first parameter.
+        param2: Description of second parameter.
+
+    Returns:
+        bool: Meaning of the return value.
+
+    Raises:
+        ValueError: When input is invalid.
+
+    Example:
+        >>> example_function(42, "test")
+        True
+    """
+```
+**Rules for contributors:**
+- Document all public interfaces (classes, methods, functions)
+- Use type hints (PEP 484)
+- Add examples for complex logic
+- Keep docstrings concise but informative
+- Use consistent style across the project
+
+Future documentation will be auto-generated with Sphinx (see docs/generate_docs.md).

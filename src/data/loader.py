@@ -12,18 +12,16 @@ from pathlib import Path
 
 
 class TestCaseLoader:
-    """Handle dataset generation and loading operations.
+    """Handles generation and loading of test case datasets.
 
-    This class encapsulates:
-    - directory structure initialization,
-    - synthetic dataset generation with labeled clusters,
-    - loading previously generated datasets from disk.
+        This class manages the creation of synthetic test cases with predefined
+        semantic clusters and provides methods to persist and reload them.
 
-    Attributes:
-        data_dir (Path): Root directory for all data.
-        raw_dir (Path): Directory for raw datasets.
-        processed_dir (Path): Directory for processed artifacts.
-    """
+        Attributes:
+            data_dir (Path): Root directory for project data.
+            raw_dir (Path): Directory for raw datasets.
+            processed_dir (Path): Directory for processed artifacts.
+        """
 
     def __init__(self, data_dir: str = "data"):
         """Initialize data directories and ensure they exist.
@@ -51,21 +49,30 @@ class TestCaseLoader:
     ) -> pd.DataFrame:
         """Generate a synthetic dataset of test cases with semantic clusters.
 
-        Each cluster represents a functional domain (e.g., Authentication, API),
-        and contains multiple variations of test case descriptions.
+                Creates realistic test scenarios distributed across functional domains
+                (e.g., Authentication, API, UI/UX). Each cluster contains varied
+                formulations of similar test intents.
 
-        Args:
-            n_samples (int): Total number of test cases to generate.
-            n_clusters (int): Number of clusters (domains) to include.
-            seed (int): Random seed for reproducibility.
+                Args:
+                    n_samples: Total number of test cases to generate.
+                    n_clusters: Number of distinct semantic domains.
+                    seed: Random seed for reproducibility.
 
-        Returns:
-            pd.DataFrame: Generated dataset with columns:
-                - id: unique test case identifier
-                - title: short test case title
-                - description: detailed description
-                - true_cluster: ground-truth cluster label
-        """
+                Returns:
+                    pd.DataFrame: Generated dataset with columns:
+                        - id: unique identifier (e.g., TC-00001)
+                        - title: short test case title
+                        - description: detailed scenario description
+                        - true_cluster: ground-truth cluster label
+
+                Raises:
+                    ValueError: If n_samples or n_clusters is non-positive.
+
+                Example:
+                    >>> loader = TestCaseLoader()
+                    >>> df = loader.generate_synthetic(200, 4)
+                    >>> print(df["true_cluster"].value_counts())
+                """
         # Ensure reproducibility of random generation
         np.random.seed(seed)
 
