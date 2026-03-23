@@ -1,12 +1,11 @@
-.. Intelligent Test Case Clustering documentation master file, created by
-   sphinx-quickstart on Mon Mar 23 12:22:02 2026.
+Intelligent Test Case Clustering
+================================
 
-Інтелектуальна система групування та оцінки тестових сценаріїв
-============================================================
+Інтелектуальна система групування та оцінки тестових сценаріїв у процесі автоматизованого тестування ПЗ.
 
 .. toctree::
    :maxdepth: 2
-   :caption: Зміст
+   :caption: API Reference:
 
    modules
 
@@ -16,4 +15,3 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-
