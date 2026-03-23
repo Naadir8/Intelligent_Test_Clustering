@@ -15,7 +15,8 @@ from sklearn.metrics import adjusted_rand_score, normalized_mutual_info_score, s
 class TestCaseClusterer:
     """Performs clustering on embeddings and evaluates quality.
 
-        Uses KMeans by default and computes both internal and external metrics.
+        By default uses KMeans clustering and computes both external (ARI, NMI)
+        and internal (Silhouette) metrics.
 
         Attributes:
             n_clusters (int): Number of clusters.

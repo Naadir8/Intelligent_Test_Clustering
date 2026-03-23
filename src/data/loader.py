@@ -50,8 +50,8 @@ class TestCaseLoader:
         """Generate a synthetic dataset of test cases with semantic clusters.
 
                 Creates realistic test scenarios distributed across functional domains
-                (e.g., Authentication, API, UI/UX). Each cluster contains varied
-                formulations of similar test intents.
+                (Authentication, API, UI/UX, etc.). Each cluster contains multiple
+                varied formulations of similar test intents.
 
                 Args:
                     n_samples: Total number of test cases to generate.

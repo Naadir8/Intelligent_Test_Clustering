@@ -10,7 +10,16 @@ from src.embedding.embedder import TestCaseEmbedder
 
 
 def main() -> None:
-    """Launch the entire intelligent test case clustering pipeline."""
+    """Launch the complete intelligent test case clustering pipeline.
+
+    This is the main entry point that orchestrates:
+    1. Dataset generation
+    2. Embedding generation (with caching)
+    3. Clustering
+    4. Quality evaluation
+
+    The pipeline can be run repeatedly thanks to embedding caching.
+    """
     print("=== Intelligent Test Case Clustering System ===\n")
 
     # Run data generation or loading.
