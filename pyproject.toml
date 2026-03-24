@@ -45,3 +45,15 @@ indent-style = "space"
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
+
+[tool.ruff.lint]
+select = [
+    "D",   # pydocstyle — перевірка docstring (наявність, формат, стиль PEP 257 / Google / NumPy)
+    "E",   # pycodestyle errors — критичні порушення стилю (відступи, пробіли, структура коду)
+    "W",   # pycodestyle warnings — некритичні зауваження стилю (довжина рядка, зайві пробіли)
+    "F",   # Pyflakes — логічні помилки (невикористані імпорти, змінні, undefined names)
+    "I",   # isort — сортування та групування імпортів (stdlib / third-party / local)
+    "UP",  # pyupgrade — оновлення синтаксису до сучасного Python (f-strings, нові конструкції)
+    "B",   # flake8-bugbear — потенційні баги та небезпечні патерни (mutable defaults тощо)
+    "SIM", # flake8-simplify — спрощення коду (оптимізація if, скорочення виразів)
+]
