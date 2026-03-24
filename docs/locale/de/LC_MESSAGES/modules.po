@@ -1,0 +1,414 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2026, Чухліб Євгеній ІН-23
+# This file is distributed under the same license as the Intelligent Test
+# Case Clustering package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Intelligent Test Case Clustering \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-03-24 16:31+0200\n"
+"PO-Revision-Date: 2026-03-24 17:30+0200\n"
+"Last-Translator: Чухліб Євгеній <your.email@example.com>\n"
+"Language: de\n"
+"Language-Team: German <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: ../../source/modules.rst:2
+msgid "API Reference"
+msgstr "API-Referenz"
+
+#: data.loader:1 of
+msgid "Provide utilities for generating and loading test case datasets."
+msgstr "Stellt Hilfsfunktionen zum Generieren und Laden von Testfall-Datensätzen bereit."
+
+#: data.loader:3 of
+msgid ""
+"This module is responsible for: - creating synthetic test case data with "
+"predefined semantic clusters, - organizing project data directories, - "
+"persisting generated datasets to disk for reuse."
+msgstr ""
+"Dieses Modul ist verantwortlich für: - Erstellung synthetischer Testfalldaten "
+"mit vordefinierten semantischen Clustern, - Organisation der Projektverzeichnisse, "
+"- Persistierung generierter Datensätze auf der Festplatte zur Wiederverwendung."
+
+#: data.loader.TestCaseLoader:1 of
+msgid "Handles generation and loading of test case datasets."
+msgstr "Verwaltet die Generierung und das Laden von Testfall-Datensätzen."
+
+#: data.loader.TestCaseLoader:3 of
+msgid ""
+"This class manages the creation of synthetic test cases with predefined "
+"semantic clusters and provides methods to persist and reload them."
+msgstr ""
+"Diese Klasse verwaltet die Erstellung synthetischer Testfälle mit vordefinierten "
+"semantischen Clustern und stellt Methoden zum Speichern und erneuten Laden bereit."
+
+#: data.loader.TestCaseLoader:8 of
+msgid "Root directory for project data."
+msgstr "Stammverzeichnis für Projektdaten."
+
+#: clustering.clusterer.TestCaseClusterer data.loader.TestCaseLoader
+#: embedding.embedder.TestCaseEmbedder of
+msgid "type"
+msgstr "Typ"
+
+#: data.loader.TestCaseLoader:10 data.loader.TestCaseLoader:16
+#: data.loader.TestCaseLoader:22 of
+msgid "Path"
+msgstr "Pfad"
+
+#: data.loader.TestCaseLoader:14 of
+msgid "Directory for raw datasets."
+msgstr "Verzeichnis für Rohdatensätze."
+
+#: data.loader.TestCaseLoader:20 of
+msgid "Directory for processed artifacts."
+msgstr "Verzeichnis für verarbeitete Artefakte."
+
+#: data.loader.TestCaseLoader.__init__:1 of
+msgid "Initialize data directories and ensure they exist."
+msgstr "Initialisiert die Datenverzeichnisse und stellt sicher, dass sie existieren."
+
+#: ../../source/modules.rst clustering.clusterer.TestCaseClusterer.evaluate
+#: data.loader.TestCaseLoader.generate_synthetic
+#: embedding.embedder.TestCaseEmbedder.embed_dataframe of
+msgid "Parameters"
+msgstr "Parameter"
+
+#: data.loader.TestCaseLoader.__init__:3 of
+msgid "Base directory for storing project data."
+msgstr "Basisverzeichnis zum Speichern der Projektdaten."
+
+#: data.loader.TestCaseLoader.generate_synthetic:1 of
+msgid "Generate a synthetic dataset of test cases with semantic clusters."
+msgstr "Generiert einen synthetischen Datensatz von Testfällen mit semantischen Clustern."
+
+#: data.loader.TestCaseLoader.generate_synthetic:3 of
+msgid ""
+"Creates realistic test scenarios distributed across functional domains "
+"(Authentication, API, UI/UX, etc.). Each cluster contains multiple varied"
+" formulations of similar test intents."
+msgstr ""
+"Erstellt realistische Testszenarien, die über funktionale Domänen verteilt sind "
+"(Authentifizierung, API, UI/UX usw.). Jeder Cluster enthält mehrere unterschiedliche "
+"Formulierungen ähnlicher Testabsichten."
+
+#: data.loader.TestCaseLoader.generate_synthetic:7 of
+msgid "Total number of test cases to generate."
+msgstr "Gesamtzahl der zu generierenden Testfälle."
+
+#: data.loader.TestCaseLoader.generate_synthetic:8 of
+msgid "Number of distinct semantic domains."
+msgstr "Anzahl der unterschiedlichen semantischen Domänen."
+
+#: data.loader.TestCaseLoader.generate_synthetic:9 of
+msgid "Random seed for reproducibility."
+msgstr "Zufallssaat für Reproduzierbarkeit."
+
+#: ../../source/modules.rst clustering.clusterer.TestCaseClusterer.evaluate
+#: data.loader.TestCaseLoader.generate_synthetic
+#: embedding.embedder.TestCaseEmbedder.embed_dataframe of
+msgid "Returns"
+msgstr "Rückgabe"
+
+#: data.loader.TestCaseLoader.generate_synthetic:11 of
+msgid ""
+"Generated dataset with columns:     - id: unique identifier (e.g., "
+"TC-00001)     - title: short test case title     - description: detailed "
+"scenario description     - true_cluster: ground-truth cluster label"
+msgstr ""
+"Generierter Datensatz mit Spalten:     - id: eindeutiger Bezeichner (z. B. TC-00001) "
+"    - title: kurzer Testfalltitel     - description: detaillierte Szenariobeschreibung "
+"    - true_cluster: Ground-Truth-Cluster-Label"
+
+#: data.loader.TestCaseLoader.generate_synthetic:13 of
+msgid "Generated dataset with columns:"
+msgstr "Generierter Datensatz mit Spalten:"
+
+#: data.loader.TestCaseLoader.generate_synthetic:14 of
+msgid "id: unique identifier (e.g., TC-00001)"
+msgstr "id: eindeutiger Bezeichner (z. B. TC-00001)"
+
+#: data.loader.TestCaseLoader.generate_synthetic:15 of
+msgid "title: short test case title"
+msgstr "title: kurzer Testfalltitel"
+
+#: data.loader.TestCaseLoader.generate_synthetic:16 of
+msgid "description: detailed scenario description"
+msgstr "description: detaillierte Szenariobeschreibung"
+
+#: data.loader.TestCaseLoader.generate_synthetic:17 of
+msgid "true_cluster: ground-truth cluster label"
+msgstr "true_cluster: Ground-Truth-Cluster-Label"
+
+#: ../../source/modules.rst clustering.clusterer.TestCaseClusterer.evaluate
+#: data.loader.TestCaseLoader.generate_synthetic
+#: embedding.embedder.TestCaseEmbedder.embed_dataframe of
+msgid "Return type"
+msgstr "Rückgabetyp"
+
+#: ../../source/modules.rst clustering.clusterer.TestCaseClusterer.evaluate
+#: data.loader.TestCaseLoader.generate_synthetic
+#: embedding.embedder.TestCaseEmbedder.embed_dataframe of
+msgid "Raises"
+msgstr "Löst aus"
+
+#: data.loader.TestCaseLoader.generate_synthetic:20 of
+msgid "If n_samples or n_clusters is non-positive."
+msgstr "Wenn n_samples oder n_clusters nicht positiv ist."
+
+#: clustering.clusterer.TestCaseClusterer.evaluate:21
+#: data.loader.TestCaseLoader.generate_synthetic:23
+#: embedding.embedder.TestCaseEmbedder.embed_dataframe:17 of
+msgid "Example"
+msgstr "Beispiel"
+
+#: data.loader.TestCaseLoader.load:1 of
+msgid "Load previously generated dataset from disk."
+msgstr "Lädt einen zuvor generierten Datensatz von der Festplatte."
+
+#: data.loader.TestCaseLoader.load:3 of
+msgid "Loaded dataset."
+msgstr "Geladener Datensatz."
+
+#: data.loader.TestCaseLoader.load:6 of
+msgid "If dataset file does not exist."
+msgstr "Wenn die Datensatzdatei nicht existiert."
+
+#: embedding.embedder:1 of
+msgid "Provide utilities for generating sentence embeddings from test case texts."
+msgstr "Stellt Hilfsfunktionen zum Generieren von Sentence-Embeddings aus Testfalltexten bereit."
+
+#: embedding.embedder:3 of
+msgid ""
+"This module handles: - loading and configuring a transformer-based "
+"embedding model, - converting text data into dense vector "
+"representations, - integrating embeddings into pandas DataFrames, - "
+"optionally persisting embeddings for reuse."
+msgstr ""
+"Dieses Modul übernimmt: - Laden und Konfigurieren eines transformer-basierten "
+"Embedding-Modells, - Umwandlung von Textdaten in dichte Vektorrepräsentationen, "
+"- Integration von Embeddings in pandas DataFrames, - optionales Speichern von "
+"Embeddings zur Wiederverwendung."
+
+#: embedding.embedder.TestCaseEmbedder:1 of
+msgid "Generates dense vector embeddings for test case texts."
+msgstr "Generiert dichte Vektorembeddings für Testfalltexte."
+
+#: embedding.embedder.TestCaseEmbedder:3 of
+msgid ""
+"Uses a pretrained SentenceTransformer model to convert natural language "
+"descriptions into fixed-size vectors suitable for clustering."
+msgstr ""
+"Verwendet ein vortrainiertes SentenceTransformer-Modell, um natürlichsprachliche "
+"Beschreibungen in Vektoren fester Größe umzuwandeln, die für die Clusterung geeignet sind."
+
+#: embedding.embedder.TestCaseEmbedder:8 of
+msgid "Loaded embedding model."
+msgstr "Geladenes Embedding-Modell."
+
+#: embedding.embedder.TestCaseEmbedder:10 of
+msgid "SentenceTransformer"
+msgstr "SentenceTransformer"
+
+#: embedding.embedder.TestCaseEmbedder:14 of
+msgid "Device used for inference ('cpu' or 'cuda')."
+msgstr "Für die Inferenz verwendetes Gerät ('cpu' oder 'cuda')."
+
+#: embedding.embedder.TestCaseEmbedder:16 of
+msgid "str"
+msgstr "str"
+
+#: embedding.embedder.TestCaseEmbedder.__init__:1 of
+msgid "Initialize embedding model and configure execution device."
+msgstr "Initialisiert das Embedding-Modell und konfiguriert das Ausführungsgerät."
+
+#: embedding.embedder.TestCaseEmbedder.__init__:3 of
+msgid "Pretrained SentenceTransformer model identifier."
+msgstr "Bezeichner des vortrainierten SentenceTransformer-Modells."
+
+#: embedding.embedder.TestCaseEmbedder.embed:1 of
+msgid "Convert a list of texts into normalized embedding vectors."
+msgstr "Konvertiert eine Liste von Texten in normalisierte Embedding-Vektoren."
+
+#: embedding.embedder.TestCaseEmbedder.embed:3 of
+msgid "Input text samples."
+msgstr "Eingabetextproben."
+
+#: embedding.embedder.TestCaseEmbedder.embed:5 of
+msgid "Number of texts processed per batch."
+msgstr "Anzahl der pro Batch verarbeiteten Texte."
+
+#: embedding.embedder.TestCaseEmbedder.embed:8 of
+msgid "Array of shape (n_samples, embedding_dim)."
+msgstr "Array der Form (n_samples, embedding_dim)."
+
+#: embedding.embedder.TestCaseEmbedder.embed_dataframe:1 of
+msgid "Generate embeddings for a DataFrame column and attach them."
+msgstr "Generiert Embeddings für eine DataFrame-Spalte und fügt sie hinzu."
+
+#: embedding.embedder.TestCaseEmbedder.embed_dataframe:3 of
+msgid "Input DataFrame containing test cases."
+msgstr "Eingabe-DataFrame mit Testfällen."
+
+#: embedding.embedder.TestCaseEmbedder.embed_dataframe:4 of
+msgid "Name of the column with text to embed."
+msgstr "Name der Spalte mit dem zu embeddenden Text."
+
+#: embedding.embedder.TestCaseEmbedder.embed_dataframe:5 of
+msgid "Optional path to save embeddings as .npy file."
+msgstr "Optionaler Pfad zum Speichern der Embeddings als .npy-Datei."
+
+#: embedding.embedder.TestCaseEmbedder.embed_dataframe:7 of
+msgid ""
+"Copy of input DataFrame with added 'embedding' column     containing "
+"numpy arrays of shape (embedding_dim,)."
+msgstr ""
+"Kopie des Eingabe-DataFrames mit hinzugefügter 'embedding'-Spalte, die numpy-Arrays "
+"der Form (embedding_dim,) enthält."
+
+#: embedding.embedder.TestCaseEmbedder.embed_dataframe:9 of
+msgid "Copy of input DataFrame with added 'embedding' column"
+msgstr "Kopie des Eingabe-DataFrames mit hinzugefügter 'embedding'-Spalte"
+
+#: embedding.embedder.TestCaseEmbedder.embed_dataframe:10 of
+msgid "containing numpy arrays of shape (embedding_dim,)."
+msgstr "die numpy-Arrays der Form (embedding_dim,) enthält."
+
+#: embedding.embedder.TestCaseEmbedder.embed_dataframe:13 of
+msgid "If text_column does not exist in DataFrame."
+msgstr "Wenn die Spalte text_column im DataFrame nicht existiert."
+
+#: embedding.embedder.TestCaseEmbedder.embed_dataframe:14 of
+msgid "If model fails to encode texts."
+msgstr "Wenn das Modell die Texte nicht codieren konnte."
+
+#: clustering.clusterer:1 of
+msgid "Provide clustering and evaluation utilities for embedding vectors."
+msgstr "Stellt Clustering- und Evaluierungs-Hilfsfunktionen für Embedding-Vektoren bereit."
+
+#: clustering.clusterer:3 of
+msgid ""
+"This module is responsible for: - grouping embeddings into clusters using"
+" unsupervised algorithms, - evaluating clustering quality using standard "
+"metrics, - supporting comparison with ground-truth labels (if available)."
+msgstr ""
+"Dieses Modul ist verantwortlich für: - Gruppierung von Embeddings in Cluster mit "
+"unsupervised Algorithmen, - Bewertung der Clusterqualität mit Standardmetriken, "
+"- Vergleich mit Ground-Truth-Labels (falls verfügbar)."
+
+#: clustering.clusterer.TestCaseClusterer:1 of
+msgid "Performs clustering on embeddings and evaluates quality."
+msgstr "Führt Clustering von Embeddings durch und bewertet die Qualität."
+
+#: clustering.clusterer.TestCaseClusterer:3 of
+msgid ""
+"By default uses KMeans clustering and computes both external (ARI, NMI) "
+"and internal (Silhouette) metrics."
+msgstr ""
+"Standardmäßig wird KMeans-Clustering verwendet und sowohl externe (ARI, NMI) "
+"als auch interne (Silhouette) Metriken berechnet."
+
+#: clustering.clusterer.TestCaseClusterer:8 of
+msgid "Number of clusters."
+msgstr "Anzahl der Cluster."
+
+#: clustering.clusterer.TestCaseClusterer:10
+#: clustering.clusterer.TestCaseClusterer:16 of
+msgid "int"
+msgstr "int"
+
+#: clustering.clusterer.TestCaseClusterer:14 of
+msgid "Seed for reproducibility."
+msgstr "Seed für Reproduzierbarkeit."
+
+#: clustering.clusterer.TestCaseClusterer:20 of
+msgid "Fitted clustering model."
+msgstr "Angepasstes Clustering-Modell."
+
+#: clustering.clusterer.TestCaseClusterer:22 of
+msgid "KMeans"
+msgstr "KMeans"
+
+#: clustering.clusterer.TestCaseClusterer.__init__:1 of
+msgid "Initialize clustering configuration."
+msgstr "Initialisiert die Clustering-Konfiguration."
+
+#: clustering.clusterer.TestCaseClusterer.__init__:3 of
+msgid "Number of clusters for KMeans."
+msgstr "Anzahl der Cluster für KMeans."
+
+#: clustering.clusterer.TestCaseClusterer.__init__:5 of
+msgid "Random seed for deterministic results."
+msgstr "Zufallssaat für deterministische Ergebnisse."
+
+#: clustering.clusterer.TestCaseClusterer.fit_predict:1 of
+msgid "Fit KMeans model and assign cluster labels."
+msgstr "Passt das KMeans-Modell an und weist Cluster-Labels zu."
+
+#: clustering.clusterer.TestCaseClusterer.fit_predict:3 of
+msgid "Input feature matrix of shape (n_samples, embedding_dim)."
+msgstr "Eingabemerkmalsmatrix der Form (n_samples, embedding_dim)."
+
+#: clustering.clusterer.TestCaseClusterer.fit_predict:7 of
+msgid "Predicted cluster labels for each sample."
+msgstr "Vorhergesagte Cluster-Labels für jede Probe."
+
+#: clustering.clusterer.TestCaseClusterer.evaluate:1 of
+msgid "Evaluate clustering quality using multiple metrics."
+msgstr "Bewertet die Qualität der Clusterung mit mehreren Metriken."
+
+#: clustering.clusterer.TestCaseClusterer.evaluate:3 of
+msgid ""
+"Computes external metrics (ARI, NMI) against ground truth and internal "
+"metric (Silhouette Score) based on embedding distances."
+msgstr ""
+"Berechnet externe Metriken (ARI, NMI) gegenüber Ground Truth und die interne "
+"Metrik (Silhouette Score) basierend auf den Abständen zwischen Embeddings."
+
+#: clustering.clusterer.TestCaseClusterer.evaluate:6 of
+msgid "Cluster labels predicted by the model."
+msgstr "Vom Modell vorhergesagte Cluster-Labels."
+
+#: clustering.clusterer.TestCaseClusterer.evaluate:7 of
+msgid "Ground-truth cluster labels."
+msgstr "Ground-Truth-Cluster-Labels."
+
+#: clustering.clusterer.TestCaseClusterer.evaluate:8 of
+msgid "Feature matrix used for clustering."
+msgstr "Für die Clusterung verwendete Merkmalsmatrix."
+
+#: clustering.clusterer.TestCaseClusterer.evaluate:10 of
+msgid ""
+"Dictionary with metric names and values:     - Adjusted Rand Index (ARI)"
+"     - Normalized Mutual Information (NMI)     - Silhouette Score"
+msgstr ""
+"Wörterbuch mit Metriknamen und Werten:     - Adjusted Rand Index (ARI)"
+"     - Normalized Mutual Information (NMI)     - Silhouette Score"
+
+#: clustering.clusterer.TestCaseClusterer.evaluate:12 of
+msgid "Dictionary with metric names and values:"
+msgstr "Wörterbuch mit Metriknamen und Werten:"
+
+#: clustering.clusterer.TestCaseClusterer.evaluate:13 of
+msgid "Adjusted Rand Index (ARI)"
+msgstr "Adjusted Rand Index (ARI)"
+
+#: clustering.clusterer.TestCaseClusterer.evaluate:14 of
+msgid "Normalized Mutual Information (NMI)"
+msgstr "Normalized Mutual Information (NMI)"
+
+#: clustering.clusterer.TestCaseClusterer.evaluate:15 of
+msgid "Silhouette Score"
+msgstr "Silhouette Score"
+
+#: clustering.clusterer.TestCaseClusterer.evaluate:18 of
+msgid "If labels have different lengths or too few clusters."
+msgstr "Wenn die Labels unterschiedliche Längen haben oder zu wenige Cluster vorhanden sind."
