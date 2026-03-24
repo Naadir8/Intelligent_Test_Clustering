@@ -65,4 +65,88 @@ def example_function(param1: int, param2: str) -> bool:
 - Keep docstrings concise but informative
 - Use consistent style across the project
 
-Future documentation will be auto-generated with Sphinx (see docs/generate_docs.md).
+
+## Quick Start for New Developers
+
+This guide is intended for developers with a **freshly installed OS** with no required software installed yet.
+
+### 1. Prerequisites
+
+Install the following software:
+
+- **Git**
+- **Python 3.13** (or newer)
+- **pip** (usually comes with Python)
+
+### 2. Clone the Repository
+
+```bash
+git clone https://github.com/Naadir8/Intelligent_Test_Clustering.git
+cd Intelligent_Test_Clustering
+```
+
+### 3. Set Up Development Environment
+
+- Create virtual environment
+```bash
+python -m venv .venv
+```
+- Activate the environment (Windows)
+```bash
+.venv\Scripts\activate
+```
+- Activate the environment (Linux/macOS)
+```bash
+source .venv/bin/activate
+```
+
+### 4. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 5. Run the Project
+
+```bash
+python main.py
+```
+
+The system will:
+- Generate a synthetic test case dataset
+- Create text embeddings
+- Perform clustering
+- Display clustering quality metrics
+
+### 6. Basic Commands
+
+- Run main pipeline
+```bash
+python main.py
+```
+- Check code quality
+```bash
+ruff check .
+```
+- Format code
+```bash
+ruff format .
+```
+- Generate documentation
+```bash
+cd docs && make html
+```
+
+## Project Structure
+
+- data/raw/ — raw data (synthetic dataset)
+- data/processed/ — processed data (embeddings)
+- src/ — main source code
+- docs/ — project documentation
+
+## For DevOps / Release Engineers
+
+Detailed instructions for production deployment, updates, and backup procedures are located in the docs/ folder:
+- deployment.md — Production deployment guide
+- update.md — System update procedure
+- backup.md — Backup and restore strategy
