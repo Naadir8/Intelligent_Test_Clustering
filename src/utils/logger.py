@@ -1,25 +1,43 @@
-"""Centralized logging configuration for the project.
+"""Centralized logging, error handling, and localization utilities.
 
-This module provides a configurable logger with:
-- Console output
-- Rotating file logging
-- Unified formatting
+This module provides:
+- Configurable application-wide logger
+- Rotating file logging for production use
+- Localized error messages (i18n support)
+- Standardized error logging with unique identifiers
 
-It ensures consistent logging behavior across the application
-and supports log file rotation for production environments.
+It ensures consistent logging behavior and improves traceability
+and user-facing error communication.
 """
 
 import logging
 import sys
 from pathlib import Path
 from logging.handlers import RotatingFileHandler
+from typing import Optional, Dict, Any
+
+# Simple localization dictionary (can be extended to external files later)
+MESSAGES = {
+    "en": {
+        "critical_error": "A critical error occurred. Please check the logs for details.",
+        "file_not_found": "Required file not found. Please check if the data directory exists.",
+        "embedding_failed": "Failed to generate embeddings. Check model availability and memory.",
+        "clustering_failed": "Clustering process failed. Please try again with different parameters."
+    },
+    "uk": {
+        "critical_error": "Виникла критична помилка. Перевірте логи для деталей.",
+        "file_not_found": "Не знайдено необхідний файл. Перевірте наявність папки data.",
+        "embedding_failed": "Не вдалося згенерувати ембедінги. Перевірте модель та пам'ять.",
+        "clustering_failed": "Процес кластеризації завершився помилкою. Спробуйте інші параметри."
+    }
+}
 
 
 def setup_logger(
     level: str = "INFO",
     log_to_file: bool = True,
     log_dir: str = "logs",
-    max_bytes: int = 10 * 1024 * 1024,      # 10 MB
+    max_bytes: int = 10 * 1024 * 1024,
     backup_count: int = 5
 ) -> logging.Logger:
     """Configure and return the main application logger.
@@ -40,16 +58,14 @@ def setup_logger(
 
     Side Effects:
         - Creates the log directory if it does not exist.
-        - Writes logs to stdout and to rotating files (if enabled).
-        - Clears existing logger handlers before reconfiguration.
-        - Emits initialization log messages.
+        - Writes logs to stdout and rotating log files.
+        - Clears existing handlers before reconfiguration.
 
     Notes:
         - Logger name is fixed to "intelligent_test_clustering".
         - Log file name is "app.log".
-        - Uses RotatingFileHandler for size-based log rotation.
-        - Rotation policy: max_bytes per file, backup_count retained files.
-        - Safe to call multiple times (idempotent configuration).
+        - Uses size-based rotation via RotatingFileHandler.
+        - Safe to call multiple times (idempotent).
     """
     numeric_level = getattr(logging, level.upper(), logging.INFO)
 
@@ -64,12 +80,10 @@ def setup_logger(
         datefmt="%Y-%m-%d %H:%M:%S"
     )
 
-    # Console handler
     console_handler = logging.StreamHandler(sys.stdout)
     console_handler.setFormatter(formatter)
     logger.addHandler(console_handler)
 
-    # Rotating file handler
     if log_to_file:
         log_path = Path(log_dir)
         log_path.mkdir(exist_ok=True)
@@ -83,14 +97,52 @@ def setup_logger(
         file_handler.setFormatter(formatter)
         logger.addHandler(file_handler)
 
-    logger.info(f"Logger initialized with level: {level.upper()}")
-    logger.info(
-        f"Log rotation: max size {max_bytes // (1024 * 1024)}MB, "
-        f"keep {backup_count} backups"
-    )
-
     return logger
 
 
-# Global logger instance
 logger = setup_logger()
+
+
+def log_error(
+    message_key: str,
+    lang: str = "en",
+    exc_info: bool = True,
+    extra: Optional[Dict[str, Any]] = None
+) -> str:
+    """Log an error with localization and contextual metadata.
+
+    Retrieves a localized error message based on a message key and language,
+    attaches a unique error ID, and logs the error with optional context.
+
+    Args:
+        message_key (str): Key from the MESSAGES dictionary.
+        lang (str): Language code ("en" or "uk").
+        exc_info (bool): If True, includes full exception traceback.
+        extra (Optional[Dict[str, Any]]): Additional context
+            (e.g., file paths, parameters, runtime state).
+
+    Returns:
+        str: Generated unique error identifier (e.g., "ERR-XXXXXXXX").
+
+    Side Effects:
+        - Writes an error entry to the global logger.
+        - May include stack trace depending on `exc_info`.
+
+    Notes:
+        - Falls back to English if language or key is not found.
+        - Context is appended as a string to the log message.
+        - Intended for use in exception handling blocks.
+    """
+    message = MESSAGES.get(lang, MESSAGES["en"]).get(
+        message_key, "An unknown error occurred."
+    )
+
+    error_id = f"ERR-{__import__('uuid').uuid4().hex[:8].upper()}"
+
+    context = f"[Error ID: {error_id}]"
+
+    if extra:
+        context += f" | Context: {extra}"
+
+    logger.error(f"{context} {message}", exc_info=exc_info)
+    return error_id
