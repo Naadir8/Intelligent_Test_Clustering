@@ -1,44 +1,51 @@
-"""Logging configuration module.
+"""Centralized logging configuration for the project.
 
-Provides a centralized logger setup for the entire application,
-including console and optional file logging with consistent formatting.
+This module provides a configurable logger with console output,
+rotating file logging, and consistent formatting across the application.
+It is designed to be safely re-initialized with different configurations.
 """
 
 import logging
 import sys
 from pathlib import Path
+from logging.handlers import RotatingFileHandler
 
 
 def setup_logger(
     level: str = "INFO",
     log_to_file: bool = True,
-    log_dir: str = "logs"
+    log_dir: str = "logs",
+    max_bytes: int = 10 * 1024 * 1024,      # 10 MB
+    backup_count: int = 5
 ) -> logging.Logger:
     """Configure and return the main application logger.
 
-    This function initializes a logger with a unified format and attaches
-    handlers for console output and optionally file logging. Existing handlers
-    are cleared to prevent duplicate log entries when the function is called
-    multiple times.
+    This function initializes a named logger with console output and
+    optional rotating file logging. Existing handlers are cleared to
+    prevent duplicate log entries when reconfiguring the logger.
 
     Args:
-        level (str): Logging level as a string
-            (e.g., "DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL").
-        log_to_file (bool): If True, logs will also be written to a file.
-        log_dir (str): Directory where log files will be stored.
+        level (str): Logging level
+            ("DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL").
+        log_to_file (bool): If True, enables rotating file logging.
+        log_dir (str): Directory where log files are stored.
+        max_bytes (int): Maximum size (in bytes) of a single log file
+            before rotation occurs.
+        backup_count (int): Number of rotated backup log files to retain.
 
     Returns:
         logging.Logger: Configured logger instance.
 
     Side Effects:
-        - Creates a directory for log files if it does not exist.
-        - Writes logs to stdout and optionally to a file.
-        - Clears existing logger handlers to avoid duplication.
+        - Creates the log directory if it does not exist.
+        - Writes logs to stdout and optionally to rotating log files.
+        - Clears existing logger handlers before attaching new ones.
 
     Notes:
-        - The logger name is fixed to "intelligent_test_clustering".
+        - Logger name is fixed to "intelligent_test_clustering".
         - Log file name is "app.log".
-        - Safe to call multiple times due to handler reset.
+        - Uses RotatingFileHandler for log rotation.
+        - Safe to call multiple times (idempotent configuration).
     """
     numeric_level = getattr(logging, level.upper(), logging.INFO)
 
@@ -49,7 +56,6 @@ def setup_logger(
     if logger.handlers:
         logger.handlers.clear()
 
-    # Formatter: time | level | name | message
     formatter = logging.Formatter(
         fmt="%(asctime)s | %(levelname)-8s | %(name)s | %(message)s",
         datefmt="%Y-%m-%d %H:%M:%S"
@@ -60,15 +66,21 @@ def setup_logger(
     console_handler.setFormatter(formatter)
     logger.addHandler(console_handler)
 
-    # File handler
+    # Rotating file handler
     if log_to_file:
         log_path = Path(log_dir)
         log_path.mkdir(exist_ok=True)
 
-        file_handler = logging.FileHandler(log_path / "app.log", encoding="utf-8")
+        file_handler = RotatingFileHandler(
+            filename=log_path / "app.log",
+            maxBytes=max_bytes,
+            backupCount=backup_count,
+            encoding="utf-8"
+        )
         file_handler.setFormatter(formatter)
         logger.addHandler(file_handler)
 
+    logger.info(f"Logger initialized with level: {level.upper()}")
     return logger
 
 
